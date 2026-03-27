@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Hero from './components/Hero';
 import About from './components/About';
 import Program from './components/Program';
@@ -5,20 +6,50 @@ import Speakers from './components/Speakers';
 import FAQ from './components/FAQ';
 import Registration from './components/Registration';
 
+const NAV_LINKS = [
+  { href: '#about', label: 'About' },
+  { href: '#program', label: 'Program' },
+  { href: '#speakers', label: 'Speakers' },
+  { href: '#faq', label: 'FAQ' },
+];
+
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function closeMenu() { setMenuOpen(false); }
+
   return (
     <div className="app">
       <nav className="navbar">
         <div className="container navbar-inner">
           <a href="#" className="nav-logo">AI<span>Summit</span></a>
+
           <div className="nav-links">
-            <a href="#about">About</a>
-            <a href="#program">Program</a>
-            <a href="#speakers">Speakers</a>
-            <a href="#faq">FAQ</a>
+            {NAV_LINKS.map(l => (
+              <a key={l.href} href={l.href}>{l.label}</a>
+            ))}
             <a href="#registration" className="nav-cta">Register</a>
           </div>
+
+          <button
+            className={`hamburger ${menuOpen ? 'hamburger-open' : ''}`}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle navigation"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
+
+        {menuOpen && (
+          <div className="mobile-menu">
+            {NAV_LINKS.map(l => (
+              <a key={l.href} href={l.href} onClick={closeMenu}>{l.label}</a>
+            ))}
+            <a href="#registration" className="nav-cta mobile-cta" onClick={closeMenu}>Register</a>
+          </div>
+        )}
       </nav>
 
       <Hero />
