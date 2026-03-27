@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLang } from '../LangContext';
+import Reveal from './Reveal';
 
 const PHOTOS = [
   { id: 1,  alt: 'Keynote presentation on stage' },
@@ -45,12 +46,14 @@ function Gallery() {
   return (
     <section className="section section-light" id="gallery">
       <div className="container">
-        <div className="section-label">{g.label}</div>
-        <h2 className="section-title">{g.title1}<br />{g.title2}</h2>
+        <Reveal>
+          <div className="section-label">{g.label}</div>
+          <h2 className="section-title">{g.title1}<br />{g.title2}</h2>
+        </Reveal>
 
         <div className="gallery-grid">
           {PHOTOS.map((photo, i) => (
-            <button key={photo.id} className="gallery-item" onClick={() => open(i)} aria-label={photo.alt}>
+            <Reveal key={photo.id} as="button" className="gallery-item" onClick={() => open(i)} aria-label={photo.alt} delay={i * 50}>
               <img src={photo.thumb} alt={photo.alt} loading="lazy" />
               <div className="gallery-overlay">
                 <span className="gallery-zoom">
@@ -60,7 +63,7 @@ function Gallery() {
                   </svg>
                 </span>
               </div>
-            </button>
+            </Reveal>
           ))}
         </div>
       </div>

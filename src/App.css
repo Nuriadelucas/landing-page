@@ -55,6 +55,20 @@ body {
 .btn-lg   { padding: 0.85rem 2rem; font-size: 1rem; }
 .btn-full { width: 100%; text-align: center; }
 
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-up    { transform: translateY(28px); }
+.reveal-left  { transform: translateX(-28px); }
+.reveal-right { transform: translateX(28px); }
+.reveal-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 /* ── Navbar ── */
 .navbar {
   position: sticky;

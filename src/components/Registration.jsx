@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLang } from '../LangContext';
+import Reveal from './Reveal';
 
 function Registration() {
   const { t } = useLang();
@@ -36,49 +37,53 @@ function Registration() {
   return (
     <section className="section section-dark" id="registration">
       <div className="container container-narrow">
-        <div className="section-label section-label-light">{r.label}</div>
-        <h2 className="section-title section-title-light">{r.title1}<br />{r.title2}</h2>
-        <p className="reg-subtitle">{r.subtitle}</p>
+        <Reveal>
+          <div className="section-label section-label-light">{r.label}</div>
+          <h2 className="section-title section-title-light">{r.title1}<br />{r.title2}</h2>
+          <p className="reg-subtitle">{r.subtitle}</p>
+        </Reveal>
 
-        {submitted ? (
-          <div className="success-card">
-            <div className="success-icon">✓</div>
-            <h3>{r.successTitle}</h3>
-            <p>
-              {r.successThanks} <strong>{form.name}</strong>! {r.successSent}{' '}
-              <strong>{form.email}</strong>. {r.successClosing}
-            </p>
-          </div>
-        ) : (
-          <form className="reg-form" onSubmit={handleSubmit} noValidate>
-            <div className="reg-field">
-              <label>{r.nameLabel}</label>
-              <input type="text" placeholder={r.namePlaceholder} value={form.name}
-                onChange={e => handleChange('name', e.target.value)}
-                className={errors.name ? 'input-error' : ''} />
-              {errors.name && <span className="field-error">{errors.name}</span>}
+        <Reveal delay={150}>
+          {submitted ? (
+            <div className="success-card">
+              <div className="success-icon">✓</div>
+              <h3>{r.successTitle}</h3>
+              <p>
+                {r.successThanks} <strong>{form.name}</strong>! {r.successSent}{' '}
+                <strong>{form.email}</strong>. {r.successClosing}
+              </p>
             </div>
+          ) : (
+            <form className="reg-form" onSubmit={handleSubmit} noValidate>
+              <div className="reg-field">
+                <label>{r.nameLabel}</label>
+                <input type="text" placeholder={r.namePlaceholder} value={form.name}
+                  onChange={e => handleChange('name', e.target.value)}
+                  className={errors.name ? 'input-error' : ''} />
+                {errors.name && <span className="field-error">{errors.name}</span>}
+              </div>
 
-            <div className="reg-field">
-              <label>{r.emailLabel}</label>
-              <input type="email" placeholder={r.emailPlaceholder} value={form.email}
-                onChange={e => handleChange('email', e.target.value)}
-                className={errors.email ? 'input-error' : ''} />
-              {errors.email && <span className="field-error">{errors.email}</span>}
-            </div>
+              <div className="reg-field">
+                <label>{r.emailLabel}</label>
+                <input type="email" placeholder={r.emailPlaceholder} value={form.email}
+                  onChange={e => handleChange('email', e.target.value)}
+                  className={errors.email ? 'input-error' : ''} />
+                {errors.email && <span className="field-error">{errors.email}</span>}
+              </div>
 
-            <div className="reg-field">
-              <label>{r.companyLabel}</label>
-              <input type="text" placeholder={r.companyPlaceholder} value={form.company}
-                onChange={e => handleChange('company', e.target.value)}
-                className={errors.company ? 'input-error' : ''} />
-              {errors.company && <span className="field-error">{errors.company}</span>}
-            </div>
+              <div className="reg-field">
+                <label>{r.companyLabel}</label>
+                <input type="text" placeholder={r.companyPlaceholder} value={form.company}
+                  onChange={e => handleChange('company', e.target.value)}
+                  className={errors.company ? 'input-error' : ''} />
+                {errors.company && <span className="field-error">{errors.company}</span>}
+              </div>
 
-            <button type="submit" className="btn-primary btn-lg btn-full">{r.submitBtn}</button>
-            <p className="reg-note">{r.note}</p>
-          </form>
-        )}
+              <button type="submit" className="btn-primary btn-lg btn-full">{r.submitBtn}</button>
+              <p className="reg-note">{r.note}</p>
+            </form>
+          )}
+        </Reveal>
       </div>
     </section>
   );
