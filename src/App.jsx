@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { LangProvider, useLang } from './LangContext';
 import Hero from './components/Hero';
 import About from './components/About';
 import Program from './components/Program';
@@ -7,18 +8,19 @@ import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
 import Registration from './components/Registration';
 
-const NAV_LINKS = [
-  { href: '#about', label: 'About' },
-  { href: '#program', label: 'Program' },
-  { href: '#speakers', label: 'Speakers' },
-  { href: '#gallery', label: 'Gallery' },
-  { href: '#faq', label: 'FAQ' },
-];
-
-function App() {
+function AppInner() {
+  const { t, lang, setLang } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
 
   function closeMenu() { setMenuOpen(false); }
+
+  const NAV_LINKS = [
+    { href: '#about',        label: t.nav.about },
+    { href: '#program',      label: t.nav.program },
+    { href: '#speakers',     label: t.nav.speakers },
+    { href: '#gallery',      label: t.nav.gallery },
+    { href: '#faq',          label: t.nav.faq },
+  ];
 
   return (
     <div className="app">
@@ -30,18 +32,28 @@ function App() {
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href}>{l.label}</a>
             ))}
-            <a href="#registration" className="nav-cta">Register</a>
+            <a href="#registration" className="nav-cta">{t.nav.register}</a>
+            <div className="lang-switcher">
+              <button className={lang === 'en' ? 'lang-active' : ''} onClick={() => setLang('en')}>EN</button>
+              <span className="lang-divider">|</span>
+              <button className={lang === 'ru' ? 'lang-active' : ''} onClick={() => setLang('ru')}>RU</button>
+            </div>
           </div>
 
-          <button
-            className={`hamburger ${menuOpen ? 'hamburger-open' : ''}`}
-            onClick={() => setMenuOpen(o => !o)}
-            aria-label="Toggle navigation"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="nav-right-mobile">
+            <div className="lang-switcher">
+              <button className={lang === 'en' ? 'lang-active' : ''} onClick={() => setLang('en')}>EN</button>
+              <span className="lang-divider">|</span>
+              <button className={lang === 'ru' ? 'lang-active' : ''} onClick={() => setLang('ru')}>RU</button>
+            </div>
+            <button
+              className={`hamburger ${menuOpen ? 'hamburger-open' : ''}`}
+              onClick={() => setMenuOpen(o => !o)}
+              aria-label="Toggle navigation"
+            >
+              <span /><span /><span />
+            </button>
+          </div>
         </div>
 
         {menuOpen && (
@@ -49,7 +61,7 @@ function App() {
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href} onClick={closeMenu}>{l.label}</a>
             ))}
-            <a href="#registration" className="nav-cta mobile-cta" onClick={closeMenu}>Register</a>
+            <a href="#registration" className="nav-cta mobile-cta" onClick={closeMenu}>{t.nav.register}</a>
           </div>
         )}
       </nav>
@@ -64,11 +76,19 @@ function App() {
 
       <footer className="footer">
         <div className="container footer-inner">
-          <p>© 2026 AI in Business Summit. All rights reserved.</p>
-          <p>Madrid, Spain · April 20, 2026</p>
+          <p>{t.footer.rights}</p>
+          <p>{t.footer.location}</p>
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <LangProvider>
+      <AppInner />
+    </LangProvider>
   );
 }
 

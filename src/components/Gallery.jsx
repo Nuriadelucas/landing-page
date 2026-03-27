@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLang } from '../LangContext';
 
 const PHOTOS = [
   { id: 1,  alt: 'Keynote presentation on stage' },
@@ -17,6 +18,8 @@ const PHOTOS = [
 }));
 
 function Gallery() {
+  const { t } = useLang();
+  const g = t.gallery;
   const [index, setIndex] = useState(null);
 
   function open(i)  { setIndex(i); }
@@ -28,9 +31,9 @@ function Gallery() {
     if (index === null) return;
     document.body.style.overflow = 'hidden';
     function onKey(e) {
-      if (e.key === 'Escape')      close();
-      if (e.key === 'ArrowLeft')   prev();
-      if (e.key === 'ArrowRight')  next();
+      if (e.key === 'Escape')     close();
+      if (e.key === 'ArrowLeft')  prev();
+      if (e.key === 'ArrowRight') next();
     }
     window.addEventListener('keydown', onKey);
     return () => {
@@ -42,8 +45,8 @@ function Gallery() {
   return (
     <section className="section section-light" id="gallery">
       <div className="container">
-        <div className="section-label">Gallery</div>
-        <h2 className="section-title">Past Event<br />Highlights</h2>
+        <div className="section-label">{g.label}</div>
+        <h2 className="section-title">{g.title1}<br />{g.title2}</h2>
 
         <div className="gallery-grid">
           {PHOTOS.map((photo, i) => (
@@ -64,16 +67,12 @@ function Gallery() {
 
       {index !== null && (
         <div className="lightbox" onClick={close}>
-          <button className="lightbox-close" onClick={close} aria-label="Close">✕</button>
-
-          <button className="lightbox-arrow lightbox-prev" onClick={prev} aria-label="Previous">‹</button>
-
+          <button className="lightbox-close" onClick={close} aria-label={g.close}>✕</button>
+          <button className="lightbox-arrow lightbox-prev" onClick={prev} aria-label={g.prev}>‹</button>
           <div className="lightbox-content" onClick={e => e.stopPropagation()}>
             <img src={PHOTOS[index].full} alt={PHOTOS[index].alt} />
           </div>
-
-          <button className="lightbox-arrow lightbox-next" onClick={next} aria-label="Next">›</button>
-
+          <button className="lightbox-arrow lightbox-next" onClick={next} aria-label={g.next}>›</button>
           <div className="lightbox-counter">{index + 1} / {PHOTOS.length}</div>
         </div>
       )}

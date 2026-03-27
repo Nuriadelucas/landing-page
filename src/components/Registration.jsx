@@ -1,19 +1,23 @@
 import { useState } from 'react';
+import { useLang } from '../LangContext';
 
 function Registration() {
+  const { t } = useLang();
+  const r = t.registration;
+
   const [form, setForm] = useState({ name: '', email: '', company: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
   function validate() {
     const e = {};
-    if (!form.name.trim()) e.name = 'Full name is required.';
+    if (!form.name.trim()) e.name = r.errName;
     if (!form.email.trim()) {
-      e.email = 'Email address is required.';
+      e.email = r.errEmailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      e.email = 'Please enter a valid email address.';
+      e.email = r.errEmailInvalid;
     }
-    if (!form.company.trim()) e.company = 'Company name is required.';
+    if (!form.company.trim()) e.company = r.errCompany;
     return e;
   }
 
@@ -25,76 +29,54 @@ function Registration() {
   function handleSubmit(e) {
     e.preventDefault();
     const e2 = validate();
-    if (Object.keys(e2).length > 0) {
-      setErrors(e2);
-      return;
-    }
+    if (Object.keys(e2).length > 0) { setErrors(e2); return; }
     setSubmitted(true);
   }
 
   return (
     <section className="section section-dark" id="registration">
       <div className="container container-narrow">
-        <div className="section-label section-label-light">Register</div>
-        <h2 className="section-title section-title-light">Secure Your Spot<br />Today</h2>
-        <p className="reg-subtitle">
-          Spaces are limited. Register now to join 500+ leaders at AI in Business Summit 2026.
-        </p>
+        <div className="section-label section-label-light">{r.label}</div>
+        <h2 className="section-title section-title-light">{r.title1}<br />{r.title2}</h2>
+        <p className="reg-subtitle">{r.subtitle}</p>
 
         {submitted ? (
           <div className="success-card">
             <div className="success-icon">✓</div>
-            <h3>You're registered!</h3>
+            <h3>{r.successTitle}</h3>
             <p>
-              Thanks, <strong>{form.name}</strong>! A confirmation email has been sent to{' '}
-              <strong>{form.email}</strong>. We look forward to seeing you in Madrid.
+              {r.successThanks} <strong>{form.name}</strong>! {r.successSent}{' '}
+              <strong>{form.email}</strong>. {r.successClosing}
             </p>
           </div>
         ) : (
           <form className="reg-form" onSubmit={handleSubmit} noValidate>
             <div className="reg-field">
-              <label>Full Name</label>
-              <input
-                type="text"
-                placeholder="Jane Smith"
-                value={form.name}
+              <label>{r.nameLabel}</label>
+              <input type="text" placeholder={r.namePlaceholder} value={form.name}
                 onChange={e => handleChange('name', e.target.value)}
-                className={errors.name ? 'input-error' : ''}
-              />
+                className={errors.name ? 'input-error' : ''} />
               {errors.name && <span className="field-error">{errors.name}</span>}
             </div>
 
             <div className="reg-field">
-              <label>Email Address</label>
-              <input
-                type="email"
-                placeholder="jane@company.com"
-                value={form.email}
+              <label>{r.emailLabel}</label>
+              <input type="email" placeholder={r.emailPlaceholder} value={form.email}
                 onChange={e => handleChange('email', e.target.value)}
-                className={errors.email ? 'input-error' : ''}
-              />
+                className={errors.email ? 'input-error' : ''} />
               {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
 
             <div className="reg-field">
-              <label>Company</label>
-              <input
-                type="text"
-                placeholder="Acme Corp"
-                value={form.company}
+              <label>{r.companyLabel}</label>
+              <input type="text" placeholder={r.companyPlaceholder} value={form.company}
                 onChange={e => handleChange('company', e.target.value)}
-                className={errors.company ? 'input-error' : ''}
-              />
+                className={errors.company ? 'input-error' : ''} />
               {errors.company && <span className="field-error">{errors.company}</span>}
             </div>
 
-            <button type="submit" className="btn-primary btn-lg btn-full">
-              Register Now — It's Free
-            </button>
-
-            <p className="reg-note">
-              By registering you agree to our privacy policy. No spam, ever.
-            </p>
+            <button type="submit" className="btn-primary btn-lg btn-full">{r.submitBtn}</button>
+            <p className="reg-note">{r.note}</p>
           </form>
         )}
       </div>

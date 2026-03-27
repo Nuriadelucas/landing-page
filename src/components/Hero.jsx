@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLang } from '../LangContext';
 
 const EVENT_DATE = new Date('2026-04-20T09:00:00');
 
@@ -13,6 +14,7 @@ function getTimeLeft() {
 }
 
 function Hero() {
+  const { t } = useLang();
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
 
   useEffect(() => {
@@ -27,46 +29,43 @@ function Hero() {
   return (
     <section className="hero">
       <div className="container">
-        <div className="hero-badge">April 20, 2026 · EPAM Office, Madrid</div>
-        <h1 className="hero-title">AI in Business<br />Summit 2026</h1>
-        <p className="hero-subtitle">
-          Where AI meets business strategy — keynotes, real-world cases and networking
-          with industry leaders transforming the future of enterprise.
-        </p>
+        <div className="hero-badge">{t.hero.badge}</div>
+        <h1 className="hero-title">{t.hero.title1}<br />{t.hero.title2}</h1>
+        <p className="hero-subtitle">{t.hero.subtitle}</p>
 
         {timeLeft === null ? (
-          <div className="countdown-started">Event has started!</div>
+          <div className="countdown-started">{t.hero.started}</div>
         ) : (
           <div className="countdown">
             <div className="countdown-unit">
               <strong>{String(timeLeft.days).padStart(2, '0')}</strong>
-              <span>Days</span>
+              <span>{t.hero.days}</span>
             </div>
             <div className="countdown-sep">:</div>
             <div className="countdown-unit">
               <strong>{String(timeLeft.hours).padStart(2, '0')}</strong>
-              <span>Hours</span>
+              <span>{t.hero.hours}</span>
             </div>
             <div className="countdown-sep">:</div>
             <div className="countdown-unit">
               <strong>{String(timeLeft.minutes).padStart(2, '0')}</strong>
-              <span>Minutes</span>
+              <span>{t.hero.minutes}</span>
             </div>
           </div>
         )}
 
         <div className="hero-actions">
           <button className="btn-primary btn-lg" onClick={scrollToRegistration}>
-            Register Now
+            {t.hero.registerBtn}
           </button>
-          <a href="#program" className="btn-ghost btn-lg">View Program</a>
+          <a href="#program" className="btn-ghost btn-lg">{t.hero.programBtn}</a>
         </div>
         <div className="hero-stats">
-          <div className="stat"><strong>500+</strong><span>Attendees</span></div>
+          <div className="stat"><strong>500+</strong><span>{t.hero.attendees}</span></div>
           <div className="stat-divider" />
-          <div className="stat"><strong>4</strong><span>Speakers</span></div>
+          <div className="stat"><strong>4</strong><span>{t.hero.speakers}</span></div>
           <div className="stat-divider" />
-          <div className="stat"><strong>1 Day</strong><span>of Content</span></div>
+          <div className="stat"><strong>{t.hero.content}</strong></div>
         </div>
       </div>
     </section>
