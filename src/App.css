@@ -183,6 +183,58 @@ body {
   line-height: 1.65;
 }
 
+/* ── Countdown ── */
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  min-width: 80px;
+}
+
+.countdown-unit strong {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.countdown-unit span {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+}
+
+.countdown-sep {
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.3);
+  line-height: 1;
+  margin-bottom: 1.2rem;
+}
+
+.countdown-started {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #7bbfff;
+  margin-bottom: 2rem;
+  letter-spacing: 0.04em;
+}
+
 .hero-actions {
   display: flex;
   gap: 1rem;

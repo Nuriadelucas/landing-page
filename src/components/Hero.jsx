@@ -1,4 +1,25 @@
+import { useState, useEffect } from 'react';
+
+const EVENT_DATE = new Date('2026-04-20T09:00:00');
+
+function getTimeLeft() {
+  const diff = EVENT_DATE - Date.now();
+  if (diff <= 0) return null;
+  return {
+    days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours:   Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+  };
+}
+
 function Hero() {
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft);
+
+  useEffect(() => {
+    const id = setInterval(() => setTimeLeft(getTimeLeft()), 60000);
+    return () => clearInterval(id);
+  }, []);
+
   function scrollToRegistration() {
     document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
   }
@@ -12,6 +33,28 @@ function Hero() {
           Where AI meets business strategy — keynotes, real-world cases and networking
           with industry leaders transforming the future of enterprise.
         </p>
+
+        {timeLeft === null ? (
+          <div className="countdown-started">Event has started!</div>
+        ) : (
+          <div className="countdown">
+            <div className="countdown-unit">
+              <strong>{String(timeLeft.days).padStart(2, '0')}</strong>
+              <span>Days</span>
+            </div>
+            <div className="countdown-sep">:</div>
+            <div className="countdown-unit">
+              <strong>{String(timeLeft.hours).padStart(2, '0')}</strong>
+              <span>Hours</span>
+            </div>
+            <div className="countdown-sep">:</div>
+            <div className="countdown-unit">
+              <strong>{String(timeLeft.minutes).padStart(2, '0')}</strong>
+              <span>Minutes</span>
+            </div>
+          </div>
+        )}
+
         <div className="hero-actions">
           <button className="btn-primary btn-lg" onClick={scrollToRegistration}>
             Register Now
