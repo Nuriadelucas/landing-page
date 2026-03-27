@@ -38,7 +38,7 @@ function Registration() {
         <div className="section-label section-label-light">Register</div>
         <h2 className="section-title section-title-light">Secure Your Spot<br />Today</h2>
         <p className="reg-subtitle">
-          Spaces are limited. Register now to join 500+ leaders at Digital Horizons Summit 2025.
+          Spaces are limited. Register now to join 500+ leaders at AI in Business Summit 2026.
         </p>
 
         {submitted ? (
@@ -47,7 +47,7 @@ function Registration() {
             <h3>You're registered!</h3>
             <p>
               Thanks, <strong>{form.name}</strong>! A confirmation email has been sent to{' '}
-              <strong>{form.email}</strong>. We look forward to seeing you in Warsaw.
+              <strong>{form.email}</strong>. We look forward to seeing you in Madrid.
             </p>
           </div>
         ) : (

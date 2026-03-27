@@ -6,11 +6,11 @@ function Hero() {
   return (
     <section className="hero">
       <div className="container">
-        <div className="hero-badge">September 18–19, 2025 · Warsaw, Poland</div>
-        <h1 className="hero-title">Digital Horizons<br />Summit 2025</h1>
+        <div className="hero-badge">April 20, 2026 · EPAM Office, Madrid</div>
+        <h1 className="hero-title">AI in Business<br />Summit 2026</h1>
         <p className="hero-subtitle">
-          Where Technology Meets Business Strategy — two days of keynotes,
-          workshops, and networking with industry leaders shaping the future of enterprise tech.
+          Where AI meets business strategy — keynotes, real-world cases and networking
+          with industry leaders transforming the future of enterprise.
         </p>
         <div className="hero-actions">
           <button className="btn-primary btn-lg" onClick={scrollToRegistration}>
@@ -21,9 +21,9 @@ function Hero() {
         <div className="hero-stats">
           <div className="stat"><strong>500+</strong><span>Attendees</span></div>
           <div className="stat-divider" />
-          <div className="stat"><strong>20+</strong><span>Speakers</span></div>
+          <div className="stat"><strong>4</strong><span>Speakers</span></div>
           <div className="stat-divider" />
-          <div className="stat"><strong>2 Days</strong><span>of Content</span></div>
+          <div className="stat"><strong>1 Day</strong><span>of Content</span></div>
         </div>
       </div>
     </section>

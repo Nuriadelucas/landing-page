@@ -10,7 +10,7 @@ function App() {
     <div className="app">
       <nav className="navbar">
         <div className="container navbar-inner">
-          <a href="#" className="nav-logo">DH<span>Summit</span></a>
+          <a href="#" className="nav-logo">AI<span>Summit</span></a>
           <div className="nav-links">
             <a href="#about">About</a>
             <a href="#program">Program</a>
@@ -30,8 +30,8 @@ function App() {
 
       <footer className="footer">
         <div className="container footer-inner">
-          <p>© 2025 Digital Horizons Summit. All rights reserved.</p>
-          <p>Warsaw, Poland · September 18–19, 2025</p>
+          <p>© 2026 AI in Business Summit. All rights reserved.</p>
+          <p>Madrid, Spain · April 20, 2026</p>
         </div>
       </footer>
     </div>

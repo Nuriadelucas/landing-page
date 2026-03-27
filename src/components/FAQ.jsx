@@ -2,24 +2,24 @@ import { useState } from 'react';
 
 const ITEMS = [
   {
-    q: 'Who should attend Digital Horizons Summit?',
-    a: 'The summit is designed for technology and business leaders — CTOs, CIOs, engineering managers, architects, and senior developers who are responsible for shaping or executing digital strategy in their organisations.',
+    q: 'Who should attend this event?',
+    a: 'Business leaders, product managers, data professionals, and anyone interested in applying AI in a business context.',
   },
   {
-    q: 'Where is the event held?',
-    a: 'The summit takes place at the Warsaw Marriott Hotel, Al. Jerozolimskie 65/79, Warsaw, Poland. The venue is easily accessible by public transport and is a 20-minute drive from Warsaw Chopin Airport.',
+    q: 'Do I need a technical background to attend?',
+    a: 'No, sessions are designed for both technical and non-technical audiences.',
   },
   {
-    q: 'Is there an online / remote attendance option?',
-    a: 'Yes. All keynotes and main-stage talks will be live-streamed for registered remote participants. Workshop sessions are in-person only to ensure the best hands-on experience.',
+    q: 'Will the sessions be recorded?',
+    a: 'Yes, all registered attendees will receive access to session recordings after the event.',
   },
   {
-    q: 'What is included in the registration fee?',
-    a: 'Full access to all sessions and workshops, catered lunches and coffee breaks on both days, the evening reception on Day 1, and digital access to all presentation recordings after the event.',
+    q: 'Is there an opportunity for networking?',
+    a: 'Absolutely, there are dedicated networking sessions and informal meetups throughout the day.',
   },
   {
-    q: 'Can I get a refund if I can\'t attend?',
-    a: 'Full refunds are available up to 30 days before the event. Within 30 days, you may transfer your ticket to a colleague at no cost. Please contact us at tickets@digitalhorizons.io for assistance.',
+    q: 'How can I register?',
+    a: 'You can register through the official event website by completing the online registration form.',
   },
 ];
 
